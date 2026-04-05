@@ -12,7 +12,7 @@ function getConversationId(uid1, uid2) {
   return [uid1, uid2].sort().join('_');
 }
 
-export default function ChatWindow({ chatId, otherUser }) {
+export default function ChatWindow({ chatId, otherUser, onBack }) {
   const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -109,10 +109,11 @@ export default function ChatWindow({ chatId, otherUser }) {
     return (
       <div className="chat-empty">
         <div className="chat-empty-inner">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
-            <circle cx="32" cy="32" r="32" fill="var(--accent)" opacity="0.1"/>
-            <path d="M14 22C14 19.7909 15.7909 18 18 18H46C48.2091 18 50 19.7909 50 22V38C50 40.2091 48.2091 42 46 42H36L28 48V42H18C15.7909 42 14 40.2091 14 38V22Z" fill="var(--accent)" opacity="0.5"/>
-          </svg>
+          <div className="chat-empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="48" height="48">
+              <path d="M8 9.5l-2 2 2 2m8-4l2 2-2 2M12 4v16m8-16H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" />
+            </svg>
+          </div>
           <h2>Your messages</h2>
           <p>Search for someone above to start a private conversation.</p>
         </div>
@@ -124,12 +125,17 @@ export default function ChatWindow({ chatId, otherUser }) {
     <div className="chat-window">
       {/* Header */}
       <div className="chat-header">
+        <button className="back-btn" onClick={onBack} aria-label="Back to sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="20" height="20">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
         <img
           src={otherUser?.photoURL || `https://ui-avatars.com/api/?name=${otherUser?.displayName}`}
           alt={otherUser?.displayName}
-          className="avatar"
+          className="avatar sm"
         />
-        <div>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <p className="chat-header-name">{otherUser?.displayName}</p>
           <p className="chat-header-status">{isTyping ? 'typing...' : otherUser?.email}</p>
         </div>

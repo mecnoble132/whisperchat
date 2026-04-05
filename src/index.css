@@ -68,7 +68,8 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 24px;
-  width: 360px;
+  width: 90%;
+  max-width: 380px;
   text-align: center;
 }
 .login-logo svg { width: 64px; height: 64px; }
@@ -116,6 +117,12 @@ body {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Sidebar ── */
 .sidebar {
   display: flex;
@@ -123,6 +130,17 @@ body {
   background: var(--surface);
   border-right: 1px solid var(--border);
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    display: none; /* Hidden by default on mobile unless active */
+  }
+  .app-layout.show-sidebar .sidebar {
+    display: flex;
+  }
 }
 .sidebar-header {
   display: flex;
@@ -311,15 +329,43 @@ body {
   background: var(--bg);
   height: 100vh;
 }
+
+@media (max-width: 768px) {
+  .chat-window {
+    display: none; /* Hidden by default on mobile unless active */
+  }
+  .app-layout.show-chat .chat-window {
+    display: flex;
+  }
+}
 .chat-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 24px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
   flex-shrink: 0;
 }
+.back-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px 4px;
+  margin-left: -8px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+@media (max-width: 768px) {
+  .back-btn {
+    display: flex;
+    align-items: center;
+  }
+}
+.back-btn:hover { color: var(--text); background: var(--surface2); }
+
 .chat-header-name { font-size: 0.95rem; font-weight: 600; }
 .chat-header-status { font-size: 0.78rem; color: var(--text-muted); }
 

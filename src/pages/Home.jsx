@@ -22,6 +22,11 @@ export default function Home() {
     setActiveOtherUser(otherUser);
   };
 
+  const handleBack = () => {
+    setActiveChatId(null);
+    setActiveOtherUser(null);
+  };
+
   const handleNewChat = async (otherUser) => {
     if (!otherUser?.uid) return;
     
@@ -47,13 +52,17 @@ export default function Home() {
   };
 
   return (
-    <div className="app-layout">
+    <div className={`app-layout ${activeChatId ? 'show-chat' : 'show-sidebar'}`}>
       <Sidebar
         activeChatId={activeChatId}
         onSelectChat={handleSelectChat}
         onNewChat={handleNewChat}
       />
-      <ChatWindow chatId={activeChatId} otherUser={activeOtherUser} />
+      <ChatWindow 
+        chatId={activeChatId} 
+        otherUser={activeOtherUser} 
+        onBack={handleBack}
+      />
     </div>
   );
 }
