@@ -114,6 +114,7 @@ body {
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -328,6 +329,9 @@ body {
   flex-direction: column;
   background: var(--bg);
   height: 100vh;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -346,6 +350,9 @@ body {
   border-bottom: 1px solid var(--border);
   background: var(--surface);
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 .back-btn {
   display: none;
@@ -462,6 +469,9 @@ body {
   border-top: 1px solid var(--border);
   background: var(--surface);
   flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
 }
 .chat-input {
   flex: 1;
